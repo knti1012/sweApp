@@ -38,6 +38,7 @@ public class Main extends Activity implements OnClickListener {
 		
 		final Intent intent = new Intent(view.getContext(), KundeDetails.class);
 		intent.putExtra(KUNDE_KEY, kunde);
+		
 		startActivity(intent);
 	}
     

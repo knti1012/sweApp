@@ -10,7 +10,7 @@
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
 	<application
-		android:icon="@drawable/ic_launcher"
+		android:icon="@drawable/ic_shop"
 		android:label="@string/s_app_name"
 		android:theme="@style/Holo"
 		android:allowBackup="true" >

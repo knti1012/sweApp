@@ -1,6 +1,7 @@
 package de.shop.ui.kunde;
 
 import static de.shop.util.Constants.KUNDE_KEY;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,9 +28,9 @@ public class KundeDetails extends Activity {
         fillValues(kunde);
         
 //      Entfaellt seit Android 4.1 bzw. API 16 durch <activity android:parentActivityName="..."> in AndroidManifest.xml
-//		final ActionBar actionBar = getActionBar();
-//		actionBar.setHomeButtonEnabled(true);
-//		actionBar.setDisplayHomeAsUpEnabled(true);
+		final ActionBar actionBar = getActionBar();
+		actionBar.setHomeButtonEnabled(true);
+		actionBar.setDisplayHomeAsUpEnabled(true);
     }
     
     private void fillValues(Kunde kunde) {

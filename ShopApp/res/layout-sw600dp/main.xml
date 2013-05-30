@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+	tools:context=".ui.main.Main" >
+
+	
+    <fragment
+    	android:id="@+id/nav"
+    	android:name="de.shop.ui.main.MainNav"
+    	android:layout_weight="1"
+    	android:layout_width="0dp"
+    	android:layout_height="match_parent" />
+    
+	<!-- dynamisch austauschbar -->
+    <FrameLayout
+    	android:id="@+id/details"
+    	android:layout_weight="4"
+    	android:layout_width="0dp"
+    	android:layout_height="match_parent" />
+
+</LinearLayout>

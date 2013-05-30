@@ -25,11 +25,24 @@
 			</intent-filter>
 		</activity>
 		
-		<!-- Up-Navigation durch parentActivityName ab API-Level 16 bzw. 4.1 bzw. Jelly Bean -->
 		<activity
-			android:name=".ui.kunde.KundeDetails"
-			android:label="@string/k_kunde_details_title"
-			android:parentActivityName=".ui.main.Main" />
+			android:name=".ui.main.MainTablet"
+			android:label="@string/s_app_name" />
+		
+		<activity
+			android:name=".ui.main.MainSmartphone"
+			android:label="@string/s_app_name" />
+		
+		<activity
+			android:name=".ui.kunde.KundenActivity"
+			android:label="@string/s_app_name"
+			android:parentActivityName=".ui.Main" />
+		
+		<activity
+			android:name=".ui.bestellung.BestellungenActivity"
+			android:label="@string/s_app_name"
+			android:parentActivityName=".ui.Main" />
+		
 	</application>
 
 </manifest>

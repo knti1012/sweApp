@@ -7,8 +7,11 @@
 		android:minSdkVersion="14"
 		android:targetSdkVersion="17" />
 	
+	<uses-permission android:name="android.permission.INTERNET"/>
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
+	<supports-screens android:requiresSmallestWidthDp="600"/>
+	
 	<application
 		android:icon="@drawable/ic_shop"
 		android:label="@string/s_app_name"
@@ -23,9 +26,55 @@
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
+			<meta-data
+            	android:name="android.app.default_searchable"
+            	android:value=".ui.main.SucheIdActivity" />
 		</activity>
 		
 		<activity
+			android:name=".ui.kunde.KundenListe"
+			android:label="@string/k_kunden_liste_title"
+			android:parentActivityName=".ui.main.Main"
+			android:exported="false" > <!-- false ist der Defaultwert, da es keinen intent-filter gibt -->
+			
+			<meta-data
+            	android:name="android.app.default_searchable"
+            	android:value=".ui.kunde.SucheNameActivity" />
+		</activity>
+		
+		<activity
+			android:name=".ui.main.SucheIdActivity"
+			android:exported="false" >
+			
+			<!-- Activity als "searchable" deklarieren -->
+			<intent-filter>
+	            <action android:name="android.intent.action.SEARCH" />
+	            <category android:name="android.intent.category.DEFAULT" />
+	        </intent-filter>
+			
+			<!-- Weitere Konfiguration fuer die Suche durch diese Activity -->
+			<meta-data
+	            android:name="android.app.searchable"
+	            android:resource="@xml/searchable_id" /> 
+		</activity>
+		
+		<activity
+			android:name=".ui.kunde.SucheNachnameActivity"
+			android:exported="false" >
+			
+			<!-- Activity als "searchable" deklarieren -->
+			<intent-filter>
+	            <action android:name="android.intent.action.SEARCH" />
+	            <category android:name="android.intent.category.DEFAULT" />
+	        </intent-filter>
+			
+			<!-- Weitere Konfiguration fuer die Suche durch diese Activity -->
+			<meta-data
+	            android:name="android.app.searchable"
+	            android:resource="@xml/searchable_name" /> 
+		</activity>
+		
+		<!-- <activity
 			android:name=".ui.main.MainTablet"
 			android:label="@string/s_app_name" />
 		
@@ -41,7 +90,17 @@
 		<activity
 			android:name=".ui.bestellung.BestellungenActivity"
 			android:label="@string/s_app_name"
-			android:parentActivityName=".ui.Main" />
+			android:parentActivityName=".ui.Main" /> -->
+		
+		<!-- Local Services -->
+		<service
+			android:name=".service.KundeService" />
+		
+		<service
+			android:name=".service.BestellungService" />
+		
+		<service
+			android:name=".service.NetworkService" />
 		
 	</application>
 

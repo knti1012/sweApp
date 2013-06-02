@@ -1,32 +1,85 @@
 package de.shop.data;
 
-import java.io.Serializable;
+import static de.shop.ShopApp.jsonBuilderFactory;
 
-public class Kunde implements Serializable {
+import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
+
+import de.shop.util.InternalShopError;
+
+
+public class Kunde implements JsonMappable, Serializable {
 	private static final long serialVersionUID = 1293068472891525321L;
+	private static final String DATE_FORMAT = "yyyy-MM-dd";
 	
 	public Long id;
-	public String name;
-
-	public Kunde() {
-		super();
+	public int version;
+	public String nachname;
+	public String vorname;
+	public String email;
+	public String geschlecht;
+	public boolean agbAkzeptiert = true;
+	public Date erzeugt;
+	public String bestellungenUri;
+	public Adresse adresse;
+	
+	protected JsonObjectBuilder getJsonObjectBuilder() {
+		return jsonBuilderFactory.createObjectBuilder()
+				.add("id", id)
+				.add("version", version)
+				.add("nachname", nachname)
+				.add("vorname", vorname)
+				.add("email", email)
+				.add("geschlecht", geschlecht)
+				.add("agbAkzeptiert", agbAkzeptiert)
+				.add("erzeugt", new SimpleDateFormat(DATE_FORMAT, Locale.getDefault()).format(erzeugt))
+				.add("bestellungenUri", bestellungenUri)
+				.add("adresse", adresse.getJsonBuilderFactory());
+											
 	}
 	
-	public Kunde(Long id, String name) {
-		super();
-		this.id = id;
-		this.name = name;
+	@Override
+	public JsonObject toJsonObject() {
+		return getJsonObjectBuilder().build();
 	}
 
+	public void fromJsonObject(JsonObject jsonObject) {
+		id = Long.valueOf(jsonObject.getJsonNumber("id").longValue());
+	    version = jsonObject.getInt("version");
+		nachname = jsonObject.getString("nachname");
+		vorname = jsonObject.getString("vorname");
+		email = jsonObject.getString("email");
+		adresse = new Adresse();
+		adresse.fromJsonObject(jsonObject.getJsonObject("adresse"));
+		agbAkzeptiert = jsonObject.getBoolean("agbAkzeptiert");
+		try {
+			erzeugt = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault()).parse(jsonObject.getString("seit"));
+		}
+		catch (ParseException e) {
+			throw new InternalShopError(e.getMessage(), e);
+		};
+		bestellungenUri = jsonObject.getString("bestellungenUri");
+	}
+	
+	@Override
+	public void updateVersion() {
+		version++;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -36,21 +89,19 @@ public class Kunde implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Kunde other = (Kunde) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (email == null) {
+			if (other.email != null)
 				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
+		} else if (!email.equals(other.email))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Kunde [id=" + id + ", name=" + name + "]";
+		return "Kunde [id=" + id + ", version=" + version
+				+ ", email=" + email + ", erzeugt=" + erzeugt + ", geschlecht="
+				+ geschlecht + ", nachname=" + nachname + ", password="
+				+ ", vorname=" + vorname + "]";
 	}
 }

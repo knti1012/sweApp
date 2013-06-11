@@ -67,11 +67,13 @@ public class KundeBestellungen extends Fragment implements OnItemClickListener, 
 		// View-IDs fuer die Textfelder einer Bestellung des aktuellen Kunden
 		final TextView kundeTxt = (TextView) view.findViewById(R.id.bestellungen_kunde_id);
 		kundeTxt.setText(getString(R.string.k_bestellungen_kunde_id, kunde.id));
+		Log.v(LOG_TAG, "!!! KundeTxt Text zugewiesen !!!");
 		txtBestellungId = (TextView) view.findViewById(R.id.bestellung_id);
 		txtBestellungDatum = (TextView) view.findViewById(R.id.datum);
 		
 		final Activity activity = getActivity();
 		if (Main.class.equals(activity.getClass())) {
+			Log.v(LOG_TAG, "!!! Main.class equals activity Class !!!");
 			Main main = (Main) activity;
 			kundeServiceBinder = main.getKundeServiceBinder();
 			bestellungServiceBinder = main.getBestellungServiceBinder();
@@ -92,6 +94,7 @@ public class KundeBestellungen extends Fragment implements OnItemClickListener, 
 		}
 		else {
 			// ListView mit den IDs der Bestellungen aufbauen
+			Log.v(LOG_TAG, "!!! List View: bestellungen-liste !!!");
 			final ListView listView = (ListView) view.findViewById(R.id.bestellungen_liste);
 	        int anzahl = bestellungenIds.size();
 	        bestellungen = new ArrayList<Bestellung>(anzahl);
@@ -110,6 +113,8 @@ public class KundeBestellungen extends Fragment implements OnItemClickListener, 
 			listView.setOnItemClickListener(this);
 			
 			// Die neueste Bestellung visualisieren
+			Log.v(LOG_TAG, " !!! Vor activateBestellung !!!");
+			Log.v(LOG_TAG, "bestellungenIds: "+bestellungenIds.toString());
 			activateBestellung(0, view);
 		}
 		
@@ -159,6 +164,7 @@ public class KundeBestellungen extends Fragment implements OnItemClickListener, 
 	private void activateBestellung(int itemPosition, View view) {
 		// Bestellung-ID ermitteln
 		bestellungenListePos = bestellungenIds.size() - itemPosition - 1;
+		Log.v(LOG_TAG, "bestellungenListePos: " + bestellungenListePos);
 		
 		// Bestellung ermitteln bzw. per Web Service nachladen
 		bestellung = bestellungen.get(bestellungenListePos);
@@ -167,6 +173,8 @@ public class KundeBestellungen extends Fragment implements OnItemClickListener, 
 			Log.v(LOG_TAG, "Bestellung nachladen: " + bestellungId);
 			
 			bestellung = bestellungServiceBinder.getBestellungById(bestellungId, view.getContext()).resultObject;
+			
+			Log.v(LOG_TAG, "Bestellung nachgeladen!!!");
 		}
 		else {
 			Log.v(LOG_TAG, "Bereits geladene Bestellung: " + bestellung);

@@ -13,13 +13,13 @@
 		"version": 0,
         "plz": "76133",
         "stadt": "Karlsruhe",
-        "strasse": "Moltkestraße",
+        "strasse": "Moltkestrasse",
         "hausnummer": "31",
 		"land": "Deutschland"
     },
     "agbAkzeptiert": true,
     "bestellungenUri": "http://localhost:8080/shop/rest/kunden/100/bestellungen",
-    "geschlecht": "MAENNLICH"
+    "geschlecht": "M"
 },
 {
 	"id": 101,
@@ -35,13 +35,13 @@
 		"version": 0,
         "plz": "76133",
         "stadt": "Frankfurt",
-        "strasse": "Moltkestraße",
+        "strasse": "Moltkestrasse",
         "hausnummer": "31",
 		"land": "Deutschland"
     },
     "agbAkzeptiert": true,
     "bestellungenUri": "http://localhost:8080/shop/rest/kunden/101/bestellungen",
-    "geschlecht": "WEIBLICH"
+    "geschlecht": "W"
 },
 {
 	"id": 102,
@@ -63,6 +63,6 @@
     },
     "agbAkzeptiert": true,
     "bestellungenUri": "http://localhost:8080/shop/rest/kunden/102/bestellungen",
-    "geschlecht": "MAENNLICH"
+    "geschlecht": "M"
 }
 ]

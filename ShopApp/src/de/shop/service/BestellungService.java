@@ -4,7 +4,6 @@ import static de.shop.ui.main.Prefs.mock;
 import static de.shop.ui.main.Prefs.timeout;
 import static de.shop.util.Constants.BESTELLUNGEN_PATH;
 import static java.util.concurrent.TimeUnit.SECONDS;
-
 import android.app.ProgressDialog;
 import android.app.Service;
 import android.content.Context;
@@ -55,12 +54,22 @@ public class BestellungService extends Service {
 				// Neuer Thread, damit der UI-Thread nicht blockiert wird
 				protected HttpResponse<Bestellung> doInBackground(Long... ids) {
 					final Long bestellungId = ids[0];
+					Log.v(LOG_TAG, "BestellungID: "+ ids[0]);
 		    		final String path = BESTELLUNGEN_PATH + "/" + bestellungId;
 		    		Log.v(LOG_TAG, "path = " + path);
 
-		    		final HttpResponse<Bestellung> result = mock
-		    				                                ? Mock.sucheBestellungById(bestellungId)
-		    				                                : WebServiceClient.getJsonSingle(path, Bestellung.class);
+		    		final HttpResponse<Bestellung> result;// = mock
+//		    				                                ? Mock.sucheBestellungById(bestellungId)
+//		    				                                : WebServiceClient.getJsonSingle(path, Bestellung.class);
+		    		if (mock) {
+		    			Log.v(LOG_TAG, "Mock = " + true);
+		    			result = Mock.sucheBestellungById(bestellungId);
+		    			Log.v(LOG_TAG, "result = " + result.toString());
+		    		}
+		    		else {
+		    			result = WebServiceClient.getJsonSingle(path, Bestellung.class);
+		    		}
+		    		
 					Log.d(LOG_TAG + ".AsyncTask", "doInBackground: " + result);
 					return result;
 				}

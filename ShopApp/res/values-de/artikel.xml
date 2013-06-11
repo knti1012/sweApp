@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<resources>
+
+	<string name="a_artikel_neu_label">Artikel neu</string>
+    <string name="a_artikel_id">Artikelnummer</string>
+    <string name="a_name">Bezeichnung</string>
+	<string name="a_artikel_id_hint">Artikelnummer eingeben</string>
+	<string name="a_artikel_id_auswahl_hint">Wählen Sie eine Nummer aus</string>
+    <string name="a_artikelnr_fehlt">Die Artikelnummer fehlt</string>
+	<string name="a_artikel_not_found">Kein Artikel mit der ID %s gefunden.</string>
+    <string name="a_stammdaten">Stammdaten</string>
+    
+</resources>

@@ -35,7 +35,7 @@ public class KundeStammdaten extends Fragment implements OnTouchListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         kunde = (Kunde) getArguments().get(KUNDE_KEY);
-        Log.d(LOG_TAG, kunde.toString());
+        Log.d(LOG_TAG, "KundeStammdaten, OnCreateView "+ kunde.toString());
 
         // Voraussetzung fuer onOptionsItemSelected()
         setHasOptionsMenu(true);
@@ -46,6 +46,7 @@ public class KundeStammdaten extends Fragment implements OnTouchListener {
 	
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
+		Log.v(LOG_TAG, "onViewCreated = " + kunde.toString());
 		fillValues(view);
     	
     	final Activity activity = getActivity();
@@ -55,54 +56,60 @@ public class KundeStammdaten extends Fragment implements OnTouchListener {
     }
 	
 	private void fillValues(View view) {
+		Log.v(LOG_TAG, "fillValues- KundeID = " + kunde.id.toString());
 		final TextView txtId = (TextView) view.findViewById(R.id.kunde_id);
     	txtId.setText(kunde.id.toString());
     	
+    	Log.v(LOG_TAG, "fillValues- Nachname = " + kunde.nachname);
     	final TextView txtNachname = (TextView) view.findViewById(R.id.nachname_txt);
     	txtNachname.setText(kunde.nachname);
     	
+    	Log.v(LOG_TAG, "fillValues- Vorname = " + kunde.vorname);
     	final TextView txtVorname = (TextView) view.findViewById(R.id.vorname);
     	txtVorname.setText(kunde.vorname);
     	
+    	Log.v(LOG_TAG, "fillValues- Email = " + kunde.email);
     	final TextView txtEmail = (TextView) view.findViewById(R.id.email);
     	txtEmail.setText(kunde.email);
     	
+    	Log.v(LOG_TAG, "fillValues- PLZ = " + kunde.adresse.plz);
     	final TextView txtPlz = (TextView) view.findViewById(R.id.plz);
     	txtPlz.setText(kunde.adresse.plz);
     	
+    	Log.v(LOG_TAG, "fillValues- Ort = " + kunde.adresse.stadt);
     	final TextView txtOrt = (TextView) view.findViewById(R.id.ort);
     	txtOrt.setText(kunde.adresse.stadt);
     	
+    	Log.v(LOG_TAG, "fillValues- Strasse = " + kunde.adresse.strasse);
     	final TextView txtStrasse = (TextView) view.findViewById(R.id.strasse);
     	txtStrasse.setText(kunde.adresse.strasse);
     	
     	if (kunde.adresse.hausnummer != null) {
+    		Log.v(LOG_TAG, "fillValues- Hausnummer = " + kunde.adresse.hausnummer.toString());
 	    	final TextView txtHausnr = (TextView) view.findViewById(R.id.hausnummer);
-	    	txtHausnr.setText(kunde.adresse.hausnummer);
+	    	txtHausnr.setText(kunde.adresse.hausnummer.toString());
     	}
     	
+    	Log.v(LOG_TAG, "fillValues- Seit = " + kunde.erzeugt.toString());
     	final TextView txtSeit = (TextView) view.findViewById(R.id.erzeugt);
 		final String seitStr = DateFormat.getDateFormat(view.getContext()).format(kunde.erzeugt);
     	txtSeit.setText(seitStr);
     	
+    	Log.v(LOG_TAG, "fillValues- Geschlecht = " + kunde.geschlecht);
     	final RadioButton rbMaennlich = (RadioButton) view.findViewById(R.id.maennlich);
-    	final RadioButton rbWeiblich = (RadioButton) view.findViewById(R.id.weiblich);
-    	
-    	if (kunde.getClass().equals(Kunde.class)) {
+    	final RadioButton rbWeiblich = (RadioButton) view.findViewById(R.id.weiblich);	
     		
-	    	if (kunde.geschlecht != null) {
-		    	if (kunde.geschlecht == "M") {
-			    	rbMaennlich.setChecked(true);
-		    	}
-		    	else if (kunde.geschlecht == "W") {
-			        	rbWeiblich.setChecked(true);
-				}
-	    	}
+    	String mann = "M";
+    	String frau = "W";
+    	if (kunde.geschlecht.equals(mann)) {
+	    	rbMaennlich.setChecked(true);
+	    	rbWeiblich.setChecked(false);
     	}
-    	else {
-    		rbMaennlich.setEnabled(false);
-    		rbWeiblich.setEnabled(false);
-    	}
+    	else if (kunde.geschlecht.equals(frau)) {
+	        rbWeiblich.setChecked(true);
+	        rbMaennlich.setChecked(false);
+		}
+    	
 	}
 
 	@Override

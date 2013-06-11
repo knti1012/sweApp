@@ -72,10 +72,16 @@ public HttpResponse<Kunde> sucheKundeById(Long id, final Context ctx) {
 					final Long id = ids[0];
 		    		final String path = KUNDEN_PATH + "/" + id;
 		    		Log.v(LOG_TAG, "path = " + path);
-		    		final HttpResponse<Kunde> result = mock
-		    				                                   ? Mock.sucheKundeById(id)
-		    				                                	: WebServiceClient.getJsonSingle(path, Kunde.class);
-		    				                               
+		    		
+		    		final HttpResponse<Kunde> result;// = mock
+//		    				                                   ? Mock.sucheKundeById(id)
+//		    				                                	: WebServiceClient.getJsonSingle(path, Kunde.class);
+		    		if (mock) {
+		    			result = Mock.sucheKundeById(id);
+		    		}
+		    		else {
+		    			result = WebServiceClient.getJsonSingle(path, Kunde.class);
+		    		}
 
 					Log.d(LOG_TAG + ".AsyncTask", "doInBackground: " + result);
 					return result;
@@ -175,9 +181,16 @@ public HttpResponse<Kunde> sucheKundeById(Long id, final Context ctx) {
 					final Long kundeId = ids[0];
 			    	final String path = KUNDEN_PATH + "/" + kundeId + "/bestellungenIds";
 					Log.v(LOG_TAG, "path = " + path);
-					final List<Long> result = mock
-													? Mock.sucheBestellungenIdsByKundeId(kundeId)
-													: WebServiceClient.getJsonLongList(path);
+					final List<Long> result;
+//													? Mock.sucheBestellungenIdsByKundeId(kundeId)
+//													: WebServiceClient.getJsonLongList(path);
+					if (mock) {
+		    			result = Mock.sucheBestellungenIdsByKundeId(kundeId);
+		    		}
+		    		else {
+		    			result = WebServiceClient.getJsonLongList(path);
+		    		}
+					
 					Log.d(LOG_TAG + ".AsyncTask", "doInBackground: " + result);
 					return result;
 				}

@@ -10,6 +10,7 @@ import javax.json.JsonReaderFactory;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 public class ShopApp extends Application {
 	public static JsonReaderFactory jsonReaderFactory;
@@ -20,6 +21,7 @@ public class ShopApp extends Application {
 	
 	@Override
 	public void onCreate() {
+		Log.v("!!!ShopApp!!!", "!!!onCreate!!!");
 		jsonReaderFactory = Json.createReaderFactory(null);
 		jsonBuilderFactory = Json.createBuilderFactory(null);
 
@@ -29,6 +31,7 @@ public class ShopApp extends Application {
 	public static InputStream open(int dateinameId) {
 		// dateinameId = R.raw.dateiname
 		// fuer die Datei res\raw\dateiname.json
+		Log.v("ShopApp", "dateinameId = " + dateinameId);
 		return ctx.getResources().openRawResource(dateinameId);
 	}
 	

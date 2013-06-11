@@ -9,6 +9,7 @@
 	<string name="s_einstellungen">Einstellungen</string>
 	<string name="s_nav_kunden">Kunden</string>
 	<string name="s_nav_bestellungen">Bestellungen</string>
+	<string name="s_nav_artikel">Artikel</string>
 	<string name="s_desc_icon">Icon für den Navigationseintrag</string>
 	<string name="s_kunden_suche_id">Suche mit Kundennr.</string>
 	<string name="s_kunden_suche_name">Suche mit Name</string>
@@ -16,6 +17,8 @@
 	<string name="s_kunden_suche_nachname">Suche mit Nachname</string>
 	<string name="s_kunden_delete">Kunde löschen</string>
 	<string name="s_neu_anlegen">Neu anlegen</string>
+	<string name="s_artikel_suche_id">Suche mit Artikelnr.</string>
+	<string name="s_artikel_neu_anlegen">Neuer Artikel</string>
     <string name="s_btn_suchen">Suchen</string>
     <string name="s_btn_delete">Löschen</string>
 	<string name="s_ja">Ja</string>

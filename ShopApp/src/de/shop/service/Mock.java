@@ -2,6 +2,7 @@ package de.shop.service;
 
 import static de.shop.ShopApp.jsonReaderFactory;
 import static de.shop.ui.main.Prefs.username;
+import static de.shop.util.Constants.ARTIKEL_PATH;
 import static de.shop.util.Constants.KUNDEN_PATH;
 import static java.net.HttpURLConnection.HTTP_CONFLICT;
 import static java.net.HttpURLConnection.HTTP_CREATED;
@@ -17,7 +18,6 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import javax.json.JsonArray;
@@ -30,6 +30,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import de.shop.R;
 import de.shop.ShopApp;
+import de.shop.data.Artikel;
 import de.shop.data.Kunde;
 import de.shop.data.Bestellung;
 import de.shop.util.InternalShopError;
@@ -62,7 +63,7 @@ final class Mock {
     	}
     	
     	final String jsonStr = sb.toString();
-    	Log.v(LOG_TAG, "jsonStr = " + jsonStr);
+    	Log.v(LOG_TAG, "read: jsonStr = " + jsonStr);
 		return jsonStr;
 	}
 	
@@ -90,10 +91,11 @@ final class Mock {
     	}
     	
     	final Kunde kunde = new Kunde();
-    	                            
 
     	kunde.fromJsonObject(jsonObject);
     	kunde.id = id;
+    	
+    	Log.v(LOG_TAG, "Mock-SucheKunde-ByID-kunde = " + kunde.toString());
 		
     	final HttpResponse<Kunde> result = new HttpResponse<Kunde>(HTTP_OK, jsonObject.toString(), kunde);
     	return result;
@@ -132,39 +134,65 @@ final class Mock {
     }
 
 	static List<Long> sucheBestellungenIdsByKundeId(Long id) {
-		if (id % 2 == 0) {
-			return Collections.emptyList();
-		}
+//		------------ Original
+//		if (id % 2 == 0) {
+//			return Collections.emptyList();
+//		}
+//		
+//		final int anzahl = (int) ((id % 3) + 3);  // 3 - 5 Bestellungen
+//		final List<Long> ids = new ArrayList<Long>(anzahl);
+//		
+//		// Bestellung IDs sind letzte Dezimalstelle, da 3-5 Bestellungen (s.o.)
+//		// Kunde-ID wird vorangestellt und deshalb mit 10 multipliziert
+//		for (int i = 0; i < anzahl; i++) {
+//			ids.add((long) (id * 10 + 2 * i + 1));
+//		}
+//		return ids;
 		
-		final int anzahl = (int) ((id % 3) + 3);  // 3 - 5 Bestellungen
-		final List<Long> ids = new ArrayList<Long>(anzahl);
+		JsonObject jsonObject = mockBestellung(id);
 		
-		// Bestellung IDs sind letzte Dezimalstelle, da 3-5 Bestellungen (s.o.)
-		// Kunde-ID wird vorangestellt und deshalb mit 10 multipliziert
-		for (int i = 0; i < anzahl; i++) {
-			ids.add((long) (id * 10 + 2 * i + 1));
-		}
-		return ids;
-	}
+    	final Bestellung bestellung = new Bestellung();
+
+    	bestellung.fromJsonObject(jsonObject);
+    	Log.v(LOG_TAG, "sucheBestellungenIdsByKundeId-Zuweisung von Json zu Bestellung");
+    	bestellung.kunde = id;
+    	
+    	Log.v(LOG_TAG, "sucheBestellungenIdsByKundeId = " + bestellung.toString());
+		
+    	final List<Long> result = new ArrayList<Long>();
+    	
+    	result.add(bestellung.id);
+//    	for (int i = 0; i < jsonObject.size(); i++) {
+//			result.add(bestellung.id);
+//		}
+		Log.v(LOG_TAG, "result: " + result.toString());
+    	return result;
+    }
 
     static List<Long> sucheKundeIdsByPrefix(String kundeIdPrefix) {
 		int dateinameId = -1;
     	if ("1".equals(kundeIdPrefix)) {
     		dateinameId = R.raw.mock_ids_1;
+        	Log.v(LOG_TAG, "dateinameId = R.raw.mock_ids_1");
     	}
     	else if ("10".equals(kundeIdPrefix)) {
     		dateinameId = R.raw.mock_ids_10;
+    		Log.v(LOG_TAG, "dateinameId = R.raw.mock_ids_10");
     	}
     	else if ("11".equals(kundeIdPrefix)) {
     		dateinameId = R.raw.mock_ids_11;
+    		Log.v(LOG_TAG, "dateinameId = R.raw.mock_ids_11");
     	}
     	else if ("2".equals(kundeIdPrefix)) {
     		dateinameId = R.raw.mock_ids_2;
+    		Log.v(LOG_TAG, "dateinameId = R.raw.mock_ids_2");
     	}
     	else if ("20".equals(kundeIdPrefix)) {
     		dateinameId = R.raw.mock_ids_20;
+    		Log.v(LOG_TAG, "dateinameId = R.raw.mock_ids_20");
     	}
     	else {
+    		Log.v(LOG_TAG, "dateinameId = emptyList");
     		return Collections.emptyList();
     	}
     	
@@ -199,11 +227,11 @@ final class Mock {
     	}
     	
 		int dateinameNachnamen = -1;
-		if (nachnamePrefix.startsWith("A")) {
-    		dateinameNachnamen = R.raw.mock_nachnamen_a;
+		if (nachnamePrefix.startsWith("T")) {
+    		dateinameNachnamen = R.raw.mock_nachnamen_t;
     	}
-    	else if (nachnamePrefix.startsWith("D")) {
-    		dateinameNachnamen = R.raw.mock_nachnamen_d;
+    	else if (nachnamePrefix.startsWith("M")) {
+    		dateinameNachnamen = R.raw.mock_nachnamen_m;
     	}
     	else {
     		return Collections.emptyList();
@@ -266,13 +294,143 @@ final class Mock {
     }
 
     static HttpResponse<Bestellung> sucheBestellungById(Long id) {
-		final Bestellung bestellung = new Bestellung(id, new Date());
-		
-		final JsonObject jsonObject = bestellung.toJsonObject();
-		final HttpResponse<Bestellung> result = new HttpResponse<Bestellung>(HTTP_OK, jsonObject.toString(), bestellung);
-		Log.d(LOG_TAG, result.resultObject.toString());
+    	
+    	JsonObject jsonObject = mockBestellung(id);
+    	
+    	final Bestellung bestellung = new Bestellung();
+
+    	bestellung.fromJsonObject(jsonObject);
+    	Log.v(LOG_TAG, "SucheBestellungById-Zuweisung von Json zu Bestellung");
+    	
+    	final HttpResponse<Bestellung> result = new HttpResponse<Bestellung>(HTTP_OK, jsonObject.toString(), bestellung);
+    	Log.d(LOG_TAG, result.resultObject.toString());
 		return result;
+		
+//    	---- Original
+//		final Bestellung bestellung = new Bestellung(id, new Date());
+//		
+//		final JsonObject jsonObject = bestellung.toJsonObject();
+//		final HttpResponse<Bestellung> result = new HttpResponse<Bestellung>(HTTP_OK, jsonObject.toString(), bestellung);
+//		Log.d(LOG_TAG, result.resultObject.toString());
+//		return result;
 	}
+    
+    static JsonObject mockBestellung (Long id) {
+    	
+    	int dateinameId;
+		
+		dateinameId = R.raw.mock_bestellung;
+		final String jsonStr = read(dateinameId);
+		JsonReader jsonReader = null;
+		JsonObject jsonObject;
+		try {
+    		jsonReader = jsonReaderFactory.createReader(new StringReader(jsonStr));
+    		jsonObject = jsonReader.readObject();
+    		Log.v(LOG_TAG, "mockBestellung-jsonObject: "+ jsonObject.toString());	
+    	}
+    	finally {
+    		if (jsonReader != null) {
+    			jsonReader.close();
+    	    	Log.v(LOG_TAG, "mockBestellung-jsonReader geschlossen!!!");    			
+    		}
+    	}
+    	
+    	return jsonObject;
+    }
+    
+    static HttpResponse<Artikel> sucheArtikelById(Long id) {
+    	if (id <= 0 || id >= 10000) {
+    		return new HttpResponse<Artikel>(HTTP_NOT_FOUND, "Kein Artikel gefunden mit ID " + id);
+    	}
+    	
+    	int dateinameId;
+    	
+    	dateinameId = R.raw.mock_artikel;
+    	
+    	
+    	final String jsonStr = read(dateinameId);
+    	JsonReader jsonReader = null;
+    	JsonObject jsonObject;
+    	try {
+    		jsonReader = jsonReaderFactory.createReader(new StringReader(jsonStr));
+    		jsonObject = jsonReader.readObject();
+    	}
+    	finally {
+    		if (jsonReader != null) {
+    			jsonReader.close();
+    		}
+    	}
+    	
+    	final Artikel artikel = new Artikel();
+
+    	artikel.fromJsonObject(jsonObject);
+    	artikel.id = id;
+    	
+    	Log.v(LOG_TAG, "Mock-SucheArtikel-ByID-artikel = " + artikel.toString());
+		
+    	final HttpResponse<Artikel> result = new HttpResponse<Artikel>(HTTP_OK, jsonObject.toString(), artikel);
+    	return result;
+	}
+    
+    static List<Long> sucheArtikelIdsByPrefix(String artikelIdPrefix) {
+		int dateinameId = -1;
+    	if ("1".equals(artikelIdPrefix)) {
+    		dateinameId = R.raw.mock_ids_1;
+        	Log.v(LOG_TAG, "dateinameId = R.raw.mock_ids_1");
+    	}
+    	else if ("10".equals(artikelIdPrefix)) {
+    		dateinameId = R.raw.mock_ids_10;
+    		Log.v(LOG_TAG, "dateinameId = R.raw.mock_ids_10");
+    	}
+    	else if ("11".equals(artikelIdPrefix)) {
+    		dateinameId = R.raw.mock_ids_11;
+    		Log.v(LOG_TAG, "dateinameId = R.raw.mock_ids_11");
+    	}
+    	else if ("2".equals(artikelIdPrefix)) {
+    		dateinameId = R.raw.mock_ids_2;
+    		Log.v(LOG_TAG, "dateinameId = R.raw.mock_ids_2");
+    	}
+    	else if ("20".equals(artikelIdPrefix)) {
+    		dateinameId = R.raw.mock_ids_20;
+    		Log.v(LOG_TAG, "dateinameId = R.raw.mock_ids_20");
+    	}
+    	else {
+    		Log.v(LOG_TAG, "dateinameId = emptyList");
+    		return Collections.emptyList();
+    	}
+    	
+    	final String jsonStr = read(dateinameId);
+		JsonReader jsonReader = null;
+    	JsonArray jsonArray;
+    	try {
+    		jsonReader = jsonReaderFactory.createReader(new StringReader(jsonStr));
+    		jsonArray = jsonReader.readArray();
+    	}
+    	finally {
+    		if (jsonReader != null) {
+    			jsonReader.close();
+    		}
+    	}
+    	
+    	final List<Long> result = new ArrayList<Long>(jsonArray.size());
+    	final List<JsonNumber> jsonNumberList = jsonArray.getValuesAs(JsonNumber.class);
+	    for (JsonNumber jsonNumber : jsonNumberList) {
+	    	final Long id = Long.valueOf(jsonNumber.longValue());
+	    	result.add(id);
+    	}
+    	
+    	Log.d(LOG_TAG, "ids= " + result.toString());
+    	
+    	return result;
+    }
+    
+    static HttpResponse<Artikel> createArtikel(Artikel artikel) {
+    	artikel.id = Long.valueOf(artikel.name.length());  // Anzahl der Buchstaben der Bezeichnung als emulierte neue ID
+    	Log.d(LOG_TAG, "createArtikel: " + artikel);
+    	Log.d(LOG_TAG, "createArtikel: " + artikel.toJsonObject());
+    	final HttpResponse<Artikel> result = new HttpResponse<Artikel>(HTTP_CREATED, ARTIKEL_PATH + "/1", artikel);
+    	return result;
+    }
     
     private Mock() {}
 }

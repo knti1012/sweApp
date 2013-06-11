@@ -11,6 +11,7 @@ import java.util.Locale;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 
+import android.util.Log;
 import de.shop.util.InternalShopError;
 
 
@@ -51,15 +52,18 @@ public class Kunde implements JsonMappable, Serializable {
 
 	public void fromJsonObject(JsonObject jsonObject) {
 		id = Long.valueOf(jsonObject.getJsonNumber("id").longValue());
-	    version = jsonObject.getInt("version");
+		version = jsonObject.getInt("version");
 		nachname = jsonObject.getString("nachname");
 		vorname = jsonObject.getString("vorname");
 		email = jsonObject.getString("email");
 		adresse = new Adresse();
 		adresse.fromJsonObject(jsonObject.getJsonObject("adresse"));
+		Log.v("Adresse", "adresse = " + this.adresse.toString());
 		agbAkzeptiert = jsonObject.getBoolean("agbAkzeptiert");
+		geschlecht = jsonObject.getString("geschlecht"); 
+		Log.v("Kunde", "kunde = " + this.toString());
 		try {
-			erzeugt = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault()).parse(jsonObject.getString("seit"));
+			erzeugt = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault()).parse(jsonObject.getString("erzeugt"));
 		}
 		catch (ParseException e) {
 			throw new InternalShopError(e.getMessage(), e);

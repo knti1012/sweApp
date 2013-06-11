@@ -7,6 +7,8 @@ import java.io.Serializable;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 
+import android.util.Log;
+
 
 public class Adresse implements JsonMappable, Serializable {
 	private static final long serialVersionUID = -4218760204888865981L;
@@ -52,12 +54,13 @@ public class Adresse implements JsonMappable, Serializable {
 	
 	@Override
 	public void fromJsonObject(JsonObject jsonObject) {	
-		Long.valueOf(jsonObject.getJsonNumber("id").longValue());
+		id = Long.valueOf(jsonObject.getJsonNumber("id").longValue());
 		version = jsonObject.getInt("version");
 		plz = jsonObject.getString("plz");
 		stadt = jsonObject.getString("stadt");
 		strasse = jsonObject.getString("strasse");
 		hausnummer = jsonObject.getInt("hausnummer");
+		land = jsonObject.getString("land");
 	}
 	
 	@Override

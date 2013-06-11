@@ -3,22 +3,37 @@ package de.shop.data;
 import static de.shop.ShopApp.jsonBuilderFactory;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import javax.json.JsonObject;
+
+import de.shop.util.InternalShopError;
+import android.util.Log;
 
 
 public class Bestellung implements JsonMappable, Serializable {
 	private static final long serialVersionUID = -3227854872557641281L;
+	private static final String DATE_FORMAT = "yyyy-MM-dd";
 	
 	public Long id;
 	public int version;
 	public Date erzeugt;
+	public Long kunde;
 
 	public Bestellung() {
 		super();
 	}
 
+	public Bestellung(long id, Date erzeugt, Long kunde) {
+		super();
+		this.id = id;
+		this.erzeugt = erzeugt;
+		this.kunde = kunde;
+	}
+	
 	public Bestellung(long id, Date erzeugt) {
 		super();
 		this.id = id;
@@ -31,14 +46,25 @@ public class Bestellung implements JsonMappable, Serializable {
 		                         .add("id", id)
 		                         .add("version", version)
 		                         .add("erzeugt", erzeugt.getTime())
+		                         .add("kunde", kunde)
 		                         .build();
 	}
 	
 	@Override
 	public void fromJsonObject(JsonObject jsonObject) {
 		id = Long.valueOf(jsonObject.getJsonNumber("id").longValue());
+		Log.v("Bestellung", "fromJsonObject !!! ID ");
 		version = jsonObject.getInt("version");
-		erzeugt = new Date(jsonObject.getJsonNumber("erzeugt").longValue());
+		Log.v("Bestellung", "fromJsonObject !!! Version ");
+		try {
+			erzeugt = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault()).parse(jsonObject.getString("erzeugt"));
+		}
+		catch (ParseException e) {
+			throw new InternalShopError(e.getMessage(), e);
+		};
+		Log.v("Bestellung", "fromJsonObject !!! Erzeugt ");
+		kunde = Long.valueOf(jsonObject.getJsonNumber("kunde").longValue());
+		Log.v("Bestellung", "fromJsonObject !!! Kunde ");
 	}
 	
 	@Override
@@ -48,6 +74,6 @@ public class Bestellung implements JsonMappable, Serializable {
 
 	@Override
 	public String toString() {
-		return "Bestellung [id=" + id + ", erzeugt=" + erzeugt + "]";
+		return "Bestellung [id=" + id + ", erzeugt=" + erzeugt + ", version=" + version +", kunde=" + kunde +"]";
 	}
 }

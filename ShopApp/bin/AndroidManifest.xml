@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="de.shop"
+	android:name="de.shop.ShopApp"
 	android:versionCode="1"
 	android:versionName="1.0" >
 
@@ -15,7 +16,8 @@
 	<application
 		android:icon="@drawable/ic_shop"
 		android:label="@string/s_app_name"
-		android:theme="@style/Holo"
+		android:theme="@style/AppTheme"
+		android:name="ShopApp"
 		android:allowBackup="true" >
 		
 		<activity

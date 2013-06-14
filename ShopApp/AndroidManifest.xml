@@ -18,7 +18,7 @@
 		android:label="@string/s_app_name"
 		android:theme="@style/AppTheme"
 		android:name="ShopApp"
-		android:allowBackup="true" >
+		android:allowBackup="true">
 		
 		<activity
 			android:name=".ui.main.Main"
@@ -100,6 +100,9 @@
 		
 		<service
 			android:name=".service.BestellungService" />
+		
+		<service
+			android:name=".service.ArtikelService" />
 		
 		<service
 			android:name=".service.NetworkService" />

@@ -122,42 +122,43 @@ public class KundeStammdaten extends Fragment implements OnTouchListener {
 		inflater.inflate(R.menu.kunde_stammdaten_options, menu);
 		
 		// "Searchable Configuration" in res\xml\searchable.xml wird der SearchView zugeordnet
-		final Activity activity = getActivity();
-	    final SearchManager searchManager = (SearchManager) activity.getSystemService(Context.SEARCH_SERVICE);
-	    final SearchView searchView = (SearchView) menu.findItem(R.id.suchen).getActionView();
-	    searchView.setSearchableInfo(searchManager.getSearchableInfo(activity.getComponentName()));
+//		final Activity activity = getActivity();
+//	    final SearchManager searchManager = (SearchManager) activity.getSystemService(Context.SEARCH_SERVICE);
+//	    final SearchView searchView = (SearchView) menu.findItem(R.id.suchen).getActionView();
+//	    searchView.setSearchableInfo(searchManager.getSearchableInfo(activity.getComponentName()));
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case R.id.edit:
-				// Evtl. vorhandene Tabs der ACTIVITY loeschen
-		    	getActivity().getActionBar().removeAllTabs();
-		    	
-				final Bundle args = new Bundle(1);
-				args.putSerializable(KUNDE_KEY, kunde);
-				
-				final Fragment neuesFragment = new KundeEdit();
-				neuesFragment.setArguments(args);
-				
-				// Kein Name (null) fuer die Transaktion, da die Klasse BackStageEntry nicht verwendet wird
-				getFragmentManager().beginTransaction()
-				                    .replace(R.id.details, neuesFragment)
-				                    .addToBackStack(null)  
-				                    .commit();
-				return true;
-				
-			case R.id.einstellungen:
+//		switch (item.getItemId()) {
+//			case R.id.edit:
+//				// Evtl. vorhandene Tabs der ACTIVITY loeschen
+//		    	getActivity().getActionBar().removeAllTabs();
+//		    	
+//				final Bundle args = new Bundle(1);
+//				args.putSerializable(KUNDE_KEY, kunde);
+//				
+//				final Fragment neuesFragment = new KundeEdit();
+//				neuesFragment.setArguments(args);
+//				
+//				// Kein Name (null) fuer die Transaktion, da die Klasse BackStageEntry nicht verwendet wird
+//				getFragmentManager().beginTransaction()
+//				                    .replace(R.id.details, neuesFragment)
+//				                    .addToBackStack(null)  
+//				                    .commit();
+//				return true;
+			if (item.getItemId() == R.id.einstellungen)	{
+//			case R.id.einstellungen:
 				getFragmentManager().beginTransaction()
                                     .replace(R.id.details, new Prefs())
                                     .addToBackStack(null)
                                     .commit();
 				return true;
 
-			default:
+			}
+			else {
 				return super.onOptionsItemSelected(item);
-		}
+			}
 	}
 	
 	@Override

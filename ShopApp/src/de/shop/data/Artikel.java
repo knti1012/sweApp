@@ -26,7 +26,7 @@ public class Artikel implements JsonMappable, Serializable  {
 	public String farbe;
 	public String groesse;
 	public String kategorie;
-	public BigInteger lagerbestand;
+	public String lagerbestand;
 	public String name;
 	public Date erzeugt;
 	public Double preis;
@@ -36,7 +36,7 @@ public class Artikel implements JsonMappable, Serializable  {
 	}
 
 	public Artikel(Long id, String art, String farbe, String groesse,
-			String kategorie, BigInteger lagerbestand, String name,
+			String kategorie, String lagerbestand, String name,
 			Date erzeugt, Double preis) {
 		super();
 		this.id = id;
@@ -74,6 +74,8 @@ public class Artikel implements JsonMappable, Serializable  {
 		Log.v("Artikel", "fromJsonObject !!! ID ");
 		version = jsonObject.getInt("version");
 		Log.v("Artikel", "fromJsonObject !!! Version ");
+		art = jsonObject.getString("art");
+		Log.v("Artikel", "fromJsonObject !!! Art ");
 		try {
 			erzeugt = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault()).parse(jsonObject.getString("erzeugt"));
 		}
@@ -87,7 +89,13 @@ public class Artikel implements JsonMappable, Serializable  {
 		Log.v("Artikel", "fromJsonObject !!! Groesse ");
 		kategorie = jsonObject.getString("kategorie");
 		Log.v("Artikel", "fromJsonObject !!! Kategorie ");
-		lagerbestand = BigInteger.valueOf(jsonObject.getJsonNumber("lagerbestand").longValue());
+//		try {
+//			lagerbestand = BigInteger.valueOf(jsonObject.getJsonNumber("lagerbestand").longValue());
+//		}
+//		catch (ParseException e) {
+//			throw new InternalShopError(e.getMessage(), e);
+//		};
+		lagerbestand = jsonObject.getString("lagerbestand");
 		Log.v("Artikel", "fromJsonObject !!! Lagerbestand ");
 		name = jsonObject.getString("name");
 		Log.v("Artikel", "fromJsonObject !!! Name ");

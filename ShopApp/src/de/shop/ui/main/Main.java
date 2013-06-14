@@ -62,12 +62,12 @@ public class Main extends Activity {
 		@Override
 		public void onServiceConnected(ComponentName name, IBinder serviceBinder) {
 			Log.v(LOG_TAG, "onServiceConnected() fuer ArtikelServiceBinder");
-			kundeServiceBinder = (KundeServiceBinder) serviceBinder;
+			artikelServiceBinder = (ArtikelServiceBinder) serviceBinder;
 		}
 
 		@Override
 		public void onServiceDisconnected(ComponentName name) {
-			kundeServiceBinder = null;
+			artikelServiceBinder = null;
 		}
 	};
 	

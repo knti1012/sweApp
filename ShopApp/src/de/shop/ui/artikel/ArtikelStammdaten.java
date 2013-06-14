@@ -1,8 +1,10 @@
 package de.shop.ui.artikel;
 
 import static de.shop.util.Constants.ARTIKEL_KEY;
+import static de.shop.util.Constants.KUNDE_KEY;
 import de.shop.R;
 import de.shop.data.Artikel;
+import de.shop.ui.kunde.KundeEdit;
 import de.shop.ui.main.Prefs;
 import de.shop.util.WischenListener;
 import android.app.Activity;
@@ -61,9 +63,37 @@ private static final String LOG_TAG = ArtikelStammdaten.class.getSimpleName();
     	txtId.setText(artikel.id.toString());
     	
     	Log.v(LOG_TAG, "fillValues- Name = " + artikel.name);
-    	final TextView txtNachname = (TextView) view.findViewById(R.id.name_txt);
-    	txtNachname.setText(artikel.name);
-    	    	
+    	final TextView txtName = (TextView) view.findViewById(R.id.name_txt);
+    	txtName.setText(artikel.name);
+    	
+    	Log.v(LOG_TAG, "fillValues- Art = " + artikel.art);
+    	final TextView txtArt = (TextView) view.findViewById(R.id.art_txt);
+    	txtArt.setText(artikel.art);
+    	
+    	Log.v(LOG_TAG, "fillValues- Farbe = " + artikel.farbe);
+    	final TextView txtFarbe = (TextView) view.findViewById(R.id.farbe_txt);
+    	txtFarbe.setText(artikel.farbe);
+    	
+    	Log.v(LOG_TAG, "fillValues- Groesse = " + artikel.groesse);
+    	final TextView txtGroesse = (TextView) view.findViewById(R.id.groesse_txt);
+    	txtGroesse.setText(artikel.groesse);	
+    	
+    	Log.v(LOG_TAG, "fillValues- Kategorie = " + artikel.kategorie);
+    	final TextView txtKategorie = (TextView) view.findViewById(R.id.kategorie_txt);
+    	txtKategorie.setText(artikel.kategorie);
+    	
+    	Log.v(LOG_TAG, "fillValues- Lagerbestand = " + artikel.lagerbestand);
+    	final TextView txtLagerbestand = (TextView) view.findViewById(R.id.lagerbestand_txt);
+    	txtLagerbestand.setText(artikel.lagerbestand);
+    	
+    	Log.v(LOG_TAG, "fillValues- Preis = " + artikel.preis);
+    	final TextView txtPreis = (TextView) view.findViewById(R.id.preis_txt);
+    	txtPreis.setText(artikel.preis.toString());
+    	
+    	Log.v(LOG_TAG, "fillValues- Erzeugt = " + artikel.erzeugt);
+    	final TextView txtErzeugt = (TextView) view.findViewById(R.id.erzeugt_txt);
+    	final String erzeugtStr = DateFormat.getDateFormat(view.getContext()).format(artikel.erzeugt);
+    	txtErzeugt.setText(erzeugtStr);    	
 	}
 
 	@Override
@@ -74,25 +104,18 @@ private static final String LOG_TAG = ArtikelStammdaten.class.getSimpleName();
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
 		inflater.inflate(R.menu.artikel_stammdaten_options, menu);
-		
-		// "Searchable Configuration" in res\xml\searchable.xml wird der SearchView zugeordnet
-		final Activity activity = getActivity();
-	    final SearchManager searchManager = (SearchManager) activity.getSystemService(Context.SEARCH_SERVICE);
-	    final SearchView searchView = (SearchView) menu.findItem(R.id.suchen).getActionView();
-	    searchView.setSearchableInfo(searchManager.getSearchableInfo(activity.getComponentName()));
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case R.id.einstellungen:
-				getFragmentManager().beginTransaction()
+		if (item.getItemId() == R.id.einstellungen) {
+			getFragmentManager().beginTransaction()
                                     .replace(R.id.details, new Prefs())
                                     .addToBackStack(null)
                                     .commit();
 				return true;
-
-			default:
+		}
+		else {
 				return super.onOptionsItemSelected(item);
 		}
 	}

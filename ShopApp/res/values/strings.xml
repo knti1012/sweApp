@@ -40,10 +40,10 @@
     <string name="s_nein">No</string>
     <string name="s_timeout_title">Timeout for server access</string>
     <string name="s_timeout_summary">Timeout in seconds</string>
-    <string name="s_username_title">Benutzername</string>
-    <string name="s_username_summary">Benutzername für den RESTful Web Service</string>
-    <string name="s_password_title">Kennwort</string>
-    <string name="s_password_summary">Kennwort für den RESTful Web Service</string>
+    <string name="s_username_title">Usernam</string>
+    <string name="s_username_summary">Username for RESTful Web Service</string>
+    <string name="s_password_title">Password</string>
+    <string name="s_password_summary">Password for RESTful Web Service</string>
     <string name="s_bitte_warten">Please wait &#8230;</string>
     <string name="s_ok">OK</string>
     <string name="s_error_prefs_login">Missing or wrong login data in the settings.</string>

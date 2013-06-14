@@ -3,8 +3,8 @@
     	android:id="@+id/kunden_suche_id"
         android:title="@string/s_kunden_suche_id"/>
     
-    <item
+   <!--  <item
     	android:id="@+id/kunden_suche_nachname"
-        android:title="@string/s_kunden_suche_nachname" />
+        android:title="@string/s_kunden_suche_nachname" /> -->
     
 </menu>

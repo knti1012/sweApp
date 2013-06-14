@@ -4,9 +4,24 @@
 	<string name="a_artikel_neu_label">New article</string>
     <string name="a_artikel_id">Article No.</string>
     <string name="a_name">Name</string>
+    <string name="a_art">Type</string>
+    <string name="a_farbe">Color</string>
+    <string name="a_groesse">Size</string>
+    <string name="a_kategorie">Category</string>
+    <string name="a_lagerbestand">Items available</string>
+    <string name="a_preis">Price in Euro</string>
+    <string name="a_erzeugt">Since</string>
 	<string name="a_artikel_id_hint">Enter article no.</string>
     <string name="a_artikel_id_auswahl_hint">Select a article no.</string>
-    <string name="a_artikelnr_fehlt">The article no. is missing.</string>
+    <string name="a_artikelnr_fehlt">The article no. is missing.</string>    
+    <string name="a_name_fehlt">The name is missing.</string>
+    <string name="a_art_fehlt">The type is missing.</string>
+    <string name="a_kategorie_fehlt">The category is missing.</string>
+    <string name="a_preis_fehlt">The preis is missing.</string>
+    <string name="a_farbe_fehlt">The color is missing.</string>
+    <string name="a_groesse_fehlt">The size is missing.</string>
+    <string name="a_lagerbestand_fehlt">The number of available items is missing.</string>
+    <string name="a_artikel_nicht_erstellt">Could not create article!</string>
     <string name="a_artikel_not_found">No article found with id %s.</string>
     <string name="a_stammdaten">Master data</string>
     

@@ -4,9 +4,24 @@
 	<string name="a_artikel_neu_label">Artikel neu</string>
     <string name="a_artikel_id">Artikelnummer</string>
     <string name="a_name">Bezeichnung</string>
+    <string name="a_art">Art</string>
+    <string name="a_farbe">Farbe</string>
+    <string name="a_groesse">Groesse</string>
+    <string name="a_kategorie">Kategorie</string>
+    <string name="a_lagerbestand">Lagerbestand</string>
+    <string name="a_preis">Preis in Euro</string>
+    <string name="a_erzeugt">Seit</string>
 	<string name="a_artikel_id_hint">Artikelnummer eingeben</string>
 	<string name="a_artikel_id_auswahl_hint">Wählen Sie eine Nummer aus</string>
     <string name="a_artikelnr_fehlt">Die Artikelnummer fehlt</string>
+    <string name="a_name_fehlt">Die Bezeichnung fehlt</string>
+    <string name="a_art_fehlt">Die Art fehlt</string>
+    <string name="a_kategorie_fehlt">Die Kategorie fehlt</string>
+    <string name="a_preis_fehlt">Der Preis fehlt</string>
+    <string name="a_farbe_fehlt">Die Farbe fehlt</string>
+    <string name="a_groesse_fehlt">Die Groesse fehlt</string>
+    <string name="a_lagerbestand_fehlt">Der Lagerbestand fehlt</string>
+    <string name="a_artikel_nicht_erstellt">Der Artikel konnte nicht angelegt werden!</string>
 	<string name="a_artikel_not_found">Kein Artikel mit der ID %s gefunden.</string>
     <string name="a_stammdaten">Stammdaten</string>
     

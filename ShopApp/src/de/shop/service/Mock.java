@@ -349,6 +349,7 @@ final class Mock {
     	
     	
     	final String jsonStr = read(dateinameId);
+    	Log.v(LOG_TAG, "jsonStr = Dateiname = "+dateinameId);
     	JsonReader jsonReader = null;
     	JsonObject jsonObject;
     	try {

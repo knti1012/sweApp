@@ -17,6 +17,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -32,13 +33,14 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
 public class ArtikelSucheId extends Fragment implements OnClickListener, OnEditorActionListener {
+	private static final String LOG_TAG = ArtikelSucheId.class.getSimpleName();
 	
 	private  AutoCompleteTextView artikelIdTxt;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		setHasOptionsMenu(true);
-		
+		Log.v(LOG_TAG, "!!! onCreateView !!!");
 		return inflater.inflate(R.layout.artikel_suche_id, container, false);
 	}
 	
@@ -53,6 +55,7 @@ public class ArtikelSucheId extends Fragment implements OnClickListener, OnEdito
 		// und implementiert deshalb die Methode onClick() unten
 		view.findViewById(R.id.btn_suchen).setOnClickListener(this);
 		
+		Log.v(LOG_TAG, "!!! onViewCreated !!!");
 	    // Evtl. vorhandene Tabs der ACTIVITY loeschen
     	final ActionBar actionBar = getActivity().getActionBar();
     	actionBar.setDisplayShowTitleEnabled(true);
@@ -102,6 +105,7 @@ public class ArtikelSucheId extends Fragment implements OnClickListener, OnEdito
 		}
 		
 		final Long artikelId = Long.valueOf(artikelIdStr);
+		Log.v(LOG_TAG, "!!! suchen() !!!");
 		final Main mainActivity = (Main) getActivity();
 		final HttpResponse<? extends Artikel> result = mainActivity.getArtikelServiceBinder().sucheArtikelById(artikelId, ctx);
 		
@@ -141,6 +145,7 @@ public class ArtikelSucheId extends Fragment implements OnClickListener, OnEdito
         
     	public AutoCompleteIdAdapter(Context ctx) {
     		super(ctx, -1);
+    		Log.v(LOG_TAG, "!!! AutoCompleteIdAdapter Konstruktor !!!");
     		inflater = LayoutInflater.from(ctx);
     	}
      

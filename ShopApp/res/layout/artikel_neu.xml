@@ -1,28 +1,30 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-	android:layout_height="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
 	tools:context=".ui.main.Main" >
-
-	<TableLayout
+	
+    <TableLayout
 	    android:layout_width="match_parent"
 		android:layout_height="wrap_content" >
 	
-		<TableRow>
+		<!-- <TableRow>
 	
 			<TextView
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:text="@string/a_artikel_id" />
 			
-			<TextView
+			
+			<EditText
 			    style="@style/RechteSpalteText"
 				android:id="@+id/artikel_id"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:textIsSelectable="false" />
 	
-		</TableRow>
+		</TableRow> -->
 		
 		<TableRow>
 	
@@ -31,12 +33,16 @@
 				android:layout_height="wrap_content"
 				android:text="@string/a_name" />
 			
-			<TextView
+			<EditText
 			    style="@style/RechteSpalteText"
-				android:id="@+id/name_txt"
+				android:id="@+id/name_edt"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:textIsSelectable="true" />
+				android:textIsSelectable="true"
+				android:imeActionId="@+id/ime_anlegen"
+				android:imeActionLabel="@string/s_neu_anlegen"
+				android:imeOptions="actionUnspecified"
+				android:inputType="text"/>
 	
 		</TableRow>
 		
@@ -47,12 +53,17 @@
 				android:layout_height="wrap_content"
 				android:text="@string/a_art" />
 			
-			<TextView
+			<EditText
 			    style="@style/RechteSpalteText"
-				android:id="@+id/art_txt"
+				android:id="@+id/art_edt"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:textIsSelectable="true" />
+				android:textIsSelectable="true"
+				android:imeActionId="@+id/ime_anlegen"
+				android:imeActionLabel="@string/s_neu_anlegen"
+				android:imeOptions="actionUnspecified"
+				android:inputType="text"/>
+	
 	
 		</TableRow>
 		
@@ -63,12 +74,17 @@
 				android:layout_height="wrap_content"
 				android:text="@string/a_farbe" />
 			
-			<TextView
+			<EditText
 			    style="@style/RechteSpalteText"
-				android:id="@+id/farbe_txt"
+				android:id="@+id/farbe_edt"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:textIsSelectable="true" />
+				android:textIsSelectable="true"
+				android:imeActionId="@+id/ime_anlegen"
+				android:imeActionLabel="@string/s_neu_anlegen"
+				android:imeOptions="actionUnspecified"
+				android:inputType="text"/>
+	
 	
 		</TableRow>
 		
@@ -79,12 +95,17 @@
 				android:layout_height="wrap_content"
 				android:text="@string/a_groesse" />
 			
-			<TextView
+			<EditText
 			    style="@style/RechteSpalteText"
-				android:id="@+id/groesse_txt"
+				android:id="@+id/groesse_edt"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:textIsSelectable="true" />
+				android:textIsSelectable="true"
+				android:imeActionId="@+id/ime_anlegen"
+				android:imeActionLabel="@string/s_neu_anlegen"
+				android:imeOptions="actionUnspecified"
+				android:inputType="text"/>
+	
 	
 		</TableRow>
 		
@@ -95,12 +116,17 @@
 				android:layout_height="wrap_content"
 				android:text="@string/a_kategorie" />
 			
-			<TextView
+			<EditText
 			    style="@style/RechteSpalteText"
-				android:id="@+id/kategorie_txt"
+				android:id="@+id/kategorie_edt"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:textIsSelectable="true" />
+				android:textIsSelectable="true"
+				android:imeActionId="@+id/ime_anlegen"
+				android:imeActionLabel="@string/s_neu_anlegen"
+				android:imeOptions="actionUnspecified"
+				android:inputType="text"/>
+	
 	
 		</TableRow>
 		
@@ -111,12 +137,17 @@
 				android:layout_height="wrap_content"
 				android:text="@string/a_lagerbestand" />
 			
-			<TextView
+			<EditText
 			    style="@style/RechteSpalteText"
-				android:id="@+id/lagerbestand_txt"
+				android:id="@+id/lagerbestand_edt"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:textIsSelectable="true" />
+				android:textIsSelectable="true"
+				android:imeActionId="@+id/ime_anlegen"
+				android:imeActionLabel="@string/s_neu_anlegen"
+				android:imeOptions="actionUnspecified"
+				android:inputType="number"/>
+	
 	
 		</TableRow>
 		
@@ -127,32 +158,27 @@
 				android:layout_height="wrap_content"
 				android:text="@string/a_preis" />
 			
-			<TextView
+			<EditText
 			    style="@style/RechteSpalteText"
-				android:id="@+id/preis_txt"
+				android:id="@+id/preis_edt"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:textIsSelectable="true"/>
+				android:textIsSelectable="true"
+				android:imeActionId="@+id/ime_anlegen"
+				android:imeActionLabel="@string/s_neu_anlegen"
+				android:imeOptions="actionUnspecified"
+				android:inputType="number"/>
+	
 	
 		</TableRow>
-		
-		<TableRow>
-	
-			<TextView
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:text="@string/a_erzeugt" />
-			
-			<TextView
-			    style="@style/RechteSpalteText"
-				android:id="@+id/erzeugt_txt"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:textIsSelectable="true" />
-	
-		</TableRow>
-		
 		
 	</TableLayout>
+	
+    <Button
+		android:id="@+id/btn_artikel_anlegen"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="50dp"
+		android:text="@string/s_neu_anlegen" />
 
-</ScrollView>
+</LinearLayout>

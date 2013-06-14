@@ -3,7 +3,6 @@
 	"version": 0,
     "nachname": "Test",
     "vorname": "Theo",
-    "erzeugt": "2001-01-31",
     "email": "theo@test.de",
     "password": "100",
     "passwordWdh": "100",
@@ -17,6 +16,6 @@
 		"land": "Deutschland"
     },
     "agbAkzeptiert": true,
-    "bestellungenUri": "http://localhost:8080/shop/rest/kunden/100/bestellungen",
+    "bestellungen": "http://localhost:8080/shop/rest/kunden/100/bestellungen",
     "geschlecht": "M"
 }

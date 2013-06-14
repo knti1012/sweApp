@@ -4,7 +4,6 @@ import static de.shop.util.Constants.ARTIKEL_KEY;
 import static de.shop.util.Constants.KUNDE_KEY;
 import de.shop.R;
 import de.shop.data.Artikel;
-import de.shop.ui.kunde.KundeEdit;
 import de.shop.ui.main.Prefs;
 import de.shop.util.WischenListener;
 import android.app.Activity;

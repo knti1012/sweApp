@@ -26,7 +26,7 @@ public class Kunde implements JsonMappable, Serializable {
 	public String email;
 	public String geschlecht;
 	public boolean agbAkzeptiert = true;
-	public Date erzeugt;
+//	public Date erzeugt;
 	public String bestellungenUri;
 	public Adresse adresse;
 	
@@ -39,7 +39,7 @@ public class Kunde implements JsonMappable, Serializable {
 				.add("email", email)
 				.add("geschlecht", geschlecht)
 				.add("agbAkzeptiert", agbAkzeptiert)
-				.add("erzeugt", new SimpleDateFormat(DATE_FORMAT, Locale.getDefault()).format(erzeugt))
+//				.add("erzeugt", new SimpleDateFormat(DATE_FORMAT, Locale.getDefault()).format(erzeugt))
 				.add("bestellungenUri", bestellungenUri)
 				.add("adresse", adresse.getJsonBuilderFactory());
 											
@@ -60,15 +60,20 @@ public class Kunde implements JsonMappable, Serializable {
 		adresse.fromJsonObject(jsonObject.getJsonObject("adresse"));
 		Log.v("Adresse", "adresse = " + this.adresse.toString());
 		agbAkzeptiert = jsonObject.getBoolean("agbAkzeptiert");
-		geschlecht = jsonObject.getString("geschlecht"); 
-		Log.v("Kunde", "kunde = " + this.toString());
-		try {
-			erzeugt = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault()).parse(jsonObject.getString("erzeugt"));
-		}
-		catch (ParseException e) {
-			throw new InternalShopError(e.getMessage(), e);
-		};
-		bestellungenUri = jsonObject.getString("bestellungenUri");
+		geschlecht = jsonObject.getString("geschlecht");
+		Log.v("Kunde", "kunde ohne bestellungen = " + this.toString());
+//		try {
+//			Log.v("Kunde", "Vor erzeugt: "+erzeugt);
+//			erzeugt = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault()).parse(jsonObject.getString("erzeugt"));
+//			Log.v("Kunde", "Nach erzeugt: "+erzeugt);
+//		}
+//		catch (ParseException e) {
+//			throw new InternalShopError(e.getMessage(), e);
+//		};
+		String x = jsonObject.getString("bestellungen");
+		Log.v("Kunde json objekt", x);
+		bestellungenUri = x;
+		Log.v("Kunde", "kunde mit bestellungen= " + this.toString());
 	}
 	
 	@Override
@@ -104,7 +109,7 @@ public class Kunde implements JsonMappable, Serializable {
 	@Override
 	public String toString() {
 		return "Kunde [id=" + id + ", version=" + version
-				+ ", email=" + email + ", erzeugt=" + erzeugt + ", geschlecht="
+				+ ", email=" + email + ", geschlecht="
 				+ geschlecht + ", nachname=" + nachname + ", password="
 				+ ", vorname=" + vorname + "]";
 	}

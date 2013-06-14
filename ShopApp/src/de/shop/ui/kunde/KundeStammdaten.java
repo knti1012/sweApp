@@ -90,10 +90,10 @@ public class KundeStammdaten extends Fragment implements OnTouchListener {
 	    	txtHausnr.setText(kunde.adresse.hausnummer.toString());
     	}
     	
-    	Log.v(LOG_TAG, "fillValues- Seit = " + kunde.erzeugt.toString());
-    	final TextView txtSeit = (TextView) view.findViewById(R.id.erzeugt);
-		final String seitStr = DateFormat.getDateFormat(view.getContext()).format(kunde.erzeugt);
-    	txtSeit.setText(seitStr);
+//    	Log.v(LOG_TAG, "fillValues- Seit = " + kunde.erzeugt.toString());
+//    	final TextView txtSeit = (TextView) view.findViewById(R.id.erzeugt);
+//		final String seitStr = DateFormat.getDateFormat(view.getContext()).format(kunde.erzeugt);
+//    	txtSeit.setText(seitStr);
     	
     	Log.v(LOG_TAG, "fillValues- Geschlecht = " + kunde.geschlecht);
     	final RadioButton rbMaennlich = (RadioButton) view.findViewById(R.id.maennlich);

@@ -170,7 +170,7 @@ final class WebServiceClient {
     	if (result.responseCode != HTTP_OK) {
     		return result;
     	}
-    	
+    	Log.v(LOG_TAG, "getJsonSingle");
     	JsonReader jsonReader = null;
     	JsonObject jsonObject;
     	try {
@@ -192,7 +192,9 @@ final class WebServiceClient {
 		catch (IllegalAccessException e) {
 			throw new InternalShopError(e.getMessage(), e);
 		}
+		Log.v(LOG_TAG, "getJsonSingle: Vor Zuweisung result");
 		result.resultObject.fromJsonObject(jsonObject);
+		Log.v(LOG_TAG, "getJsonSingle: Nach Zuweisung result");
     	
     	return result;
     }

@@ -4,6 +4,7 @@ import static android.view.inputmethod.EditorInfo.IME_NULL;
 import static de.shop.util.Constants.ARTIKEL_KEY;
 import static java.net.HttpURLConnection.HTTP_CREATED;
 import static java.net.HttpURLConnection.HTTP_NOT_FOUND;
+import static de.shop.ui.main.Prefs.mock;
 
 import java.util.Date;
 
@@ -184,10 +185,12 @@ public class ArtikelNeu extends Fragment implements OnClickListener, OnEditorAct
 			return;
 		}
 		final Double artikelPreis = Double.valueOf(artikelPreisStr);
-		final Date erzeugt = new Date();
+//		final Date erzeugt = new Date();
+		//TODO Regeln, wie ID Lokal definiert wird, bis es in DB geschrieben wird!!!
 		final Long id = Long.valueOf(artikelNameStr.length());
+		final Long artikelLagerbestand = Long.valueOf(artikelLagerbestandStr);
 		neuerArtikel = new Artikel(id, artikelArtStr, artikelFarbeStr, artikelGroesseStr, 
-				artikelKategorieStr, artikelLagerbestandStr, artikelNameStr, erzeugt, artikelPreis);
+				artikelKategorieStr, artikelLagerbestand, artikelNameStr, artikelPreis);
 		
 		Log.v(LOG_TAG, "!!! anlegen() !!!");
 		final Main mainActivity = (Main) getActivity();

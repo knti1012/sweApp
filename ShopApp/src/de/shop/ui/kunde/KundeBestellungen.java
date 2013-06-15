@@ -87,7 +87,8 @@ public class KundeBestellungen extends Fragment implements OnItemClickListener, 
 			Log.e(LOG_TAG, "Activity " + activity.getClass().getSimpleName() + " nicht beruecksichtigt.");
 			return;
 		}
-		
+
+		Log.v(LOG_TAG, "!!! 1 !!!");
 		bestellungenIds = kundeServiceBinder.sucheBestellungenIdsByKundeId(kunde.id, view.getContext());
 		if(bestellungenIds == null || bestellungenIds.isEmpty()) {
 			kundeTxt.setText(getString(R.string.k_keine_bestellungen, kunde.id));

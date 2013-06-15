@@ -2,6 +2,7 @@ package de.shop.data;
 
 import static de.shop.ShopApp.jsonBuilderFactory;
 
+import static de.shop.ui.main.Prefs.mock;
 import java.io.Serializable;
 
 import javax.json.JsonObject;
@@ -26,9 +27,9 @@ public class Artikel implements JsonMappable, Serializable  {
 	public String farbe;
 	public String groesse;
 	public String kategorie;
-	public String lagerbestand;
+	public Long lagerbestand;
 	public String name;
-	public Date erzeugt;
+//	public Date erzeugt;
 	public Double preis;
 
 	public Artikel() {
@@ -36,8 +37,8 @@ public class Artikel implements JsonMappable, Serializable  {
 	}
 
 	public Artikel(Long id, String art, String farbe, String groesse,
-			String kategorie, String lagerbestand, String name,
-			Date erzeugt, Double preis) {
+			String kategorie, Long lagerbestand, String name,
+			Double preis) {
 		super();
 		this.id = id;
 		this.art = art;
@@ -46,7 +47,7 @@ public class Artikel implements JsonMappable, Serializable  {
 		this.kategorie = kategorie;
 		this.lagerbestand = lagerbestand;
 		this.name = name;
-		this.erzeugt = erzeugt;
+//		this.erzeugt = erzeugt;
 		this.preis = preis;
 	}
 
@@ -55,7 +56,7 @@ public class Artikel implements JsonMappable, Serializable  {
 	@Override
 	public JsonObject toJsonObject() {
 		return jsonBuilderFactory.createObjectBuilder()
-		                         .add("id", id)
+		                        //.add("id", id)
 		                         .add("version", version)
 		                         .add("art", art)
 		                         .add("farbe", farbe)
@@ -63,7 +64,7 @@ public class Artikel implements JsonMappable, Serializable  {
 		                         .add("kategorie", kategorie)
 		                         .add("lagerbestand", lagerbestand)
 		                         .add("name", name)
-		                         .add("erzeugt", new SimpleDateFormat(DATE_FORMAT, Locale.getDefault()).format(erzeugt))
+		                         //.add("erzeugt", new SimpleDateFormat(DATE_FORMAT, Locale.getDefault()).format(erzeugt))
 		                         .add("preis", preis)
 		                         .build();
 	}
@@ -76,26 +77,26 @@ public class Artikel implements JsonMappable, Serializable  {
 		Log.v("Artikel", "fromJsonObject !!! Version ");
 		art = jsonObject.getString("art");
 		Log.v("Artikel", "fromJsonObject !!! Art ");
-		try {
-			erzeugt = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault()).parse(jsonObject.getString("erzeugt"));
-		}
-		catch (ParseException e) {
-			throw new InternalShopError(e.getMessage(), e);
-		};
-		Log.v("Artikel", "fromJsonObject !!! Erzeugt ");
+//		try {
+//			erzeugt = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault()).parse(jsonObject.getString("erzeugt"));
+//		}
+//		catch (ParseException e) {
+//			throw new InternalShopError(e.getMessage(), e);
+//		};
+//		Log.v("Artikel", "fromJsonObject !!! Erzeugt ");
 		farbe = jsonObject.getString("farbe");
 		Log.v("Artikel", "fromJsonObject !!! Farbe ");
 		groesse = jsonObject.getString("groesse");
 		Log.v("Artikel", "fromJsonObject !!! Groesse ");
 		kategorie = jsonObject.getString("kategorie");
 		Log.v("Artikel", "fromJsonObject !!! Kategorie ");
-//		try {
-//			lagerbestand = BigInteger.valueOf(jsonObject.getJsonNumber("lagerbestand").longValue());
-//		}
-//		catch (ParseException e) {
-//			throw new InternalShopError(e.getMessage(), e);
-//		};
-		lagerbestand = jsonObject.getString("lagerbestand");
+		try {
+			lagerbestand = Long.valueOf(jsonObject.getJsonNumber("lagerbestand").longValue());
+		}
+		catch (Exception e) {
+			throw new InternalShopError(e.getMessage(), e);
+		};
+//		lagerbestand = jsonObject.getString("lagerbestand");
 		Log.v("Artikel", "fromJsonObject !!! Lagerbestand ");
 		name = jsonObject.getString("name");
 		Log.v("Artikel", "fromJsonObject !!! Name ");
@@ -113,6 +114,6 @@ public class Artikel implements JsonMappable, Serializable  {
 		return "Artikel [id=" + id + ", version=" + version + ", art=" + art
 				+ ", farbe=" + farbe + ", groesse=" + groesse + ", kategorie="
 				+ kategorie + ", lagerbestand=" + lagerbestand + ", name="
-				+ name + ", erzeugt=" + erzeugt + ", preis=" + preis + "]";
+				+ name + ", preis=" + preis + "]";
 	}
 }

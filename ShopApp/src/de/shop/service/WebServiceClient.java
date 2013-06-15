@@ -335,20 +335,31 @@ final class WebServiceClient {
     	JsonArray jsonArray;
     	try {
     		jsonReader = jsonReaderFactory.createReader(new StringReader(response.content));
+    		Log.v(LOG_TAG, "!!! zuweisen von jsonReader erfolgreich !!!");
     		jsonArray = jsonReader.readArray();
+    		Log.v(LOG_TAG, "!!! zuweisen von jsonArray erfolgreich !!! Länge= "+jsonArray.size()+" "+jsonArray.toString());
     	}
     	finally {
     		if (jsonReader != null) {
+    			Log.v(LOG_TAG, "!!! jsonReader == Null !!!");
     			jsonReader.close();
     		}
     	}
     	
 		final List<JsonNumber> jsonNumberList = jsonArray.getValuesAs(JsonNumber.class);
+		Log.v(LOG_TAG, "!!! zuweisen von jsonNumberList erfolgreich Länge= !!!"+jsonNumberList.size()+" "+jsonNumberList.toString());
 		final List<Long> result = new ArrayList<Long>(jsonArray.size());
+//		final Long res2;
+		Log.v(LOG_TAG, "jsonArray.size()= "+jsonArray.size());
+//		res2 =  jsonNumberList.get(0).longValueExact();
+//		Log.v(LOG_TAG, "!!! zuweisen von result erfolgreich !!! Länge= "+res2.longValue()+" "+res2.toString());
 		for (JsonNumber jsonNumber : jsonNumberList) {
+			Log.v(LOG_TAG, "jsonNumber= "+jsonNumber);
 			result.add(Long.valueOf(jsonNumber.longValue()));
+			Log.v(LOG_TAG, "jsonNumber= "+jsonNumber+" erfolgreich zugewiesen");
 		}
-		
+//		final List<Long> result = new ArrayList<Long>();
+//		result.add(res2);
 		return result;
 	}
     
@@ -407,7 +418,9 @@ final class WebServiceClient {
 				httpConnection = auth(httpConnection);
 
 				writer = new BufferedWriter(new OutputStreamWriter(httpConnection.getOutputStream()));
+				Log.w(LOG_TAG, "!!! JsonObject= "+jsonMappable.toJsonObject().toString());
 				writer.write(jsonMappable.toJsonObject().toString());
+				Log.v(LOG_TAG, "!!! Writer Done !!!");
 			}
 			finally {
 				writer.close();
@@ -416,6 +429,7 @@ final class WebServiceClient {
     		statusCode = httpConnection.getResponseCode();
     		if (statusCode != HTTP_CREATED && statusCode != HTTP_NO_CONTENT && statusCode != HTTP_OK) {
     			final StringBuilder sb = new StringBuilder();
+    			Log.v(LOG_TAG, "!!! stautsCode != created, no Content und OK !!!");
     			final BufferedReader err = new BufferedReader(new InputStreamReader(httpConnection.getErrorStream()));
 				try {
 					for (;;) {

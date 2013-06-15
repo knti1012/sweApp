@@ -83,16 +83,16 @@ private static final String LOG_TAG = ArtikelStammdaten.class.getSimpleName();
     	
     	Log.v(LOG_TAG, "fillValues- Lagerbestand = " + artikel.lagerbestand);
     	final TextView txtLagerbestand = (TextView) view.findViewById(R.id.lagerbestand_txt);
-    	txtLagerbestand.setText(artikel.lagerbestand);
+    	txtLagerbestand.setText(artikel.lagerbestand.toString());
     	
     	Log.v(LOG_TAG, "fillValues- Preis = " + artikel.preis);
     	final TextView txtPreis = (TextView) view.findViewById(R.id.preis_txt);
     	txtPreis.setText(artikel.preis.toString());
     	
-    	Log.v(LOG_TAG, "fillValues- Erzeugt = " + artikel.erzeugt);
-    	final TextView txtErzeugt = (TextView) view.findViewById(R.id.erzeugt_txt);
-    	final String erzeugtStr = DateFormat.getDateFormat(view.getContext()).format(artikel.erzeugt);
-    	txtErzeugt.setText(erzeugtStr);    	
+//    	Log.v(LOG_TAG, "fillValues- Erzeugt = " + artikel.erzeugt);
+//    	final TextView txtErzeugt = (TextView) view.findViewById(R.id.erzeugt_txt);
+//    	final String erzeugtStr = DateFormat.getDateFormat(view.getContext()).format(artikel.erzeugt);
+//    	txtErzeugt.setText(erzeugtStr);    	
 	}
 
 	@Override

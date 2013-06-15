@@ -201,6 +201,8 @@ public HttpResponse<Kunde> sucheKundeById(Long id, final Context ctx) {
 	    		}
 			};
 			
+
+			Log.v(LOG_TAG, "kundeID= "+id);
 			sucheBestellungenIdsByKundeIdTask.execute(id);
 			List<Long> bestellungIds = null;
 			try {

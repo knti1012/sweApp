@@ -2,6 +2,7 @@ package de.shop.data;
 
 import static de.shop.ShopApp.jsonBuilderFactory;
 
+import static de.shop.ui.main.Prefs.mock;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -45,7 +46,7 @@ public class Bestellung implements JsonMappable, Serializable {
 		return jsonBuilderFactory.createObjectBuilder()
 		                         .add("id", id)
 		                         .add("version", version)
-		                         .add("erzeugt", erzeugt.getTime())
+		                         .add("datum", erzeugt.getTime())
 		                         .add("kunde", kunde)
 		                         .build();
 	}
@@ -56,15 +57,19 @@ public class Bestellung implements JsonMappable, Serializable {
 		Log.v("Bestellung", "fromJsonObject !!! ID ");
 		version = jsonObject.getInt("version");
 		Log.v("Bestellung", "fromJsonObject !!! Version ");
+		final Date datum = new Date(Long.valueOf(jsonObject.getJsonNumber("datum").longValue()));
+		Log.v("Datum", datum.toString());
 		try {
-			erzeugt = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault()).parse(jsonObject.getString("erzeugt"));
+			erzeugt =  datum;//new SimpleDateFormat(DATE_FORMAT, Locale.getDefault()).parse(jsonObject.getString("datum"));
 		}
-		catch (ParseException e) {
+		catch (Exception e) {
 			throw new InternalShopError(e.getMessage(), e);
 		};
 		Log.v("Bestellung", "fromJsonObject !!! Erzeugt ");
-		kunde = Long.valueOf(jsonObject.getJsonNumber("kunde").longValue());
-		Log.v("Bestellung", "fromJsonObject !!! Kunde ");
+		if (mock) {
+			kunde = Long.valueOf(jsonObject.getString("kunde"));
+			Log.v("Bestellung", "fromJsonObject !!! Kunde ");
+		}
 	}
 	
 	@Override

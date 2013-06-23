@@ -48,7 +48,6 @@ public class ArtikelNeu extends Fragment implements OnClickListener, OnEditorAct
 	private EditText editPreis;
 	private EditText editLagerbestand;
 	private EditText editFarbe;
-	private InputMethodManager imm; // = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
 	
 	private Artikel neuerArtikel;
 	
@@ -69,15 +68,6 @@ public class ArtikelNeu extends Fragment implements OnClickListener, OnEditorAct
 		editLagerbestand = (EditText) view.findViewById(R.id.lagerbestand_edt);
 		editPreis = (EditText) view.findViewById(R.id.preis_edt);
 		
-//		editName.requestFocus();
-//		imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-//		imm.showSoftInput(editName, InputMethodManager.SHOW_IMPLICIT);
-//		imm.showSoftInput(editArt, InputMethodManager.SHOW_IMPLICIT);
-//		imm.showSoftInput(editFarbe, InputMethodManager.SHOW_IMPLICIT);
-//		imm.showSoftInput(editGroesse, InputMethodManager.SHOW_IMPLICIT);
-//		imm.showSoftInput(editKategorie, InputMethodManager.SHOW_IMPLICIT);
-//		imm.showSoftInput(editLagerbestand, InputMethodManager.SHOW_IMPLICIT);
-//		imm.showSoftInput(editPreis, InputMethodManager.SHOW_IMPLICIT);
 		
 		final Main mainActivity = (Main) getActivity();
 		

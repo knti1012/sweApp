@@ -134,20 +134,6 @@ final class Mock {
     }
 
 	static List<Long> sucheBestellungenIdsByKundeId(Long id) {
-//		------------ Original
-//		if (id % 2 == 0) {
-//			return Collections.emptyList();
-//		}
-//		
-//		final int anzahl = (int) ((id % 3) + 3);  // 3 - 5 Bestellungen
-//		final List<Long> ids = new ArrayList<Long>(anzahl);
-//		
-//		// Bestellung IDs sind letzte Dezimalstelle, da 3-5 Bestellungen (s.o.)
-//		// Kunde-ID wird vorangestellt und deshalb mit 10 multipliziert
-//		for (int i = 0; i < anzahl; i++) {
-//			ids.add((long) (id * 10 + 2 * i + 1));
-//		}
-//		return ids;
 		
 		JsonObject jsonObject = mockBestellung(id);
 		
@@ -161,10 +147,9 @@ final class Mock {
 		
     	final List<Long> result = new ArrayList<Long>();
     	
-    	result.add(bestellung.id);
-//    	for (int i = 0; i < jsonObject.size(); i++) {
-//			result.add(bestellung.id);
-//		}
+    	for (int i = 0; i < jsonObject.size(); i++) {
+			result.add(bestellung.id);
+		}
 		Log.v(LOG_TAG, "result: " + result.toString());
     	return result;
     }
@@ -260,38 +245,7 @@ final class Mock {
     	Log.d(LOG_TAG, "nachnamen= " + result.toString());
     	return result;
     }
-    
-    static HttpResponse<Kunde> createKunde(Kunde kunde) {
-    	kunde.id = Long.valueOf(kunde.nachname.length());  // Anzahl der Buchstaben des Nachnamens als emulierte neue ID
-    	Log.d(LOG_TAG, "createKunde: " + kunde);
-    	Log.d(LOG_TAG, "createKunde: " + kunde.toJsonObject());
-    	final HttpResponse<Kunde> result = new HttpResponse<Kunde>(HTTP_CREATED, KUNDEN_PATH + "/1", kunde);
-    	return result;
-    }
 
-    static HttpResponse<Kunde> updateKunde(Kunde kunde) {
-    	Log.d(LOG_TAG, "updateKunde: " + kunde);
-    	
-    	if (TextUtils.isEmpty(username)) {
-    		return new HttpResponse<Kunde>(HTTP_UNAUTHORIZED, null);
-    	}
-    	
-    	if ("x".equals(username)) {
-    		return new HttpResponse<Kunde>(HTTP_FORBIDDEN, null);
-    	}
-    	
-    	if ("y".equals(username)) {
-    		return new HttpResponse<Kunde>(HTTP_CONFLICT, "Die Email-Adresse existiert bereits");
-    	}
-    	
-    	Log.d(LOG_TAG, "updateKunde: " + kunde.toJsonObject());
-    	return new HttpResponse<Kunde>(HTTP_NO_CONTENT, null, kunde);
-    }
-
-    static HttpResponse<Void> deleteKunde(Long kundeId) {
-    	Log.d(LOG_TAG, "deleteKunde: " + kundeId);
-    	return new HttpResponse<Void>(HTTP_NO_CONTENT, null);
-    }
 
     static HttpResponse<Bestellung> sucheBestellungById(Long id) {
     	

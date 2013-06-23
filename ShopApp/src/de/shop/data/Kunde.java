@@ -1,18 +1,10 @@
 package de.shop.data;
 
 import static de.shop.ShopApp.jsonBuilderFactory;
-
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
-
 import android.util.Log;
-import de.shop.util.InternalShopError;
 
 
 public class Kunde implements JsonMappable, Serializable {

@@ -33,7 +33,6 @@ public class ArtikelDetails extends Fragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		final Activity activity = getActivity();
 		final ActionBar actionBar = activity.getActionBar();
-		// (horizontale) Tabs; NAVIGATION_MODE_LIST fuer Dropdown Liste
 		actionBar.setNavigationMode(NAVIGATION_MODE_TABS);
 	    actionBar.setDisplayShowTitleEnabled(false);  // Titel der App ausblenden, um mehr Platz fuer die Tabs zu haben
 

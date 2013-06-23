@@ -122,7 +122,7 @@ public class ArtikelService extends Service {
 				}
 				
 				@Override
-				// Neuer Thread, damit der UI-Thread nicht blockiert wird
+				// Neuer zu UI-Thread separater Thread
 				protected HttpResponse<Artikel> doInBackground(Artikel... artikels) {
 					final Artikel artikel = artikels[0];
 		    		final String path = ARTIKEL_PATH;

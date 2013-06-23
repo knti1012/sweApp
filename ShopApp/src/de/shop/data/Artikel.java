@@ -2,7 +2,6 @@ package de.shop.data;
 
 import static de.shop.ShopApp.jsonBuilderFactory;
 
-import static de.shop.ui.main.Prefs.mock;
 import java.io.Serializable;
 
 import javax.json.JsonObject;
@@ -10,16 +9,10 @@ import javax.json.JsonObject;
 import de.shop.util.InternalShopError;
 import android.util.Log;
 
-import java.math.BigInteger;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 
 public class Artikel implements JsonMappable, Serializable  {
 	private static final long serialVersionUID = -3227854872557641281L;
-	private static final String DATE_FORMAT = "yyyy-MM-dd";
+
 	
 	public Long id;
 	public int version;

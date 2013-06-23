@@ -105,13 +105,7 @@ public class Main extends Activity {
         if (mock) {
         	Toast.makeText(this, R.string.s_mock, LENGTH_LONG).show();
         }
-//        final Fragment navFragment = getFragmentManager().findFragmentById(R.id.nav);
-//        final Class<? extends Activity> mainActivity = navFragment == null || !navFragment.isInLayout()
-//        		                                       ? MainSmartphone.class
-//        		                                       : MainTablet.class;
-//        
-//		final Intent intent = new Intent(this, mainActivity);
-//		startActivity(intent);
+
     }
 	
 	@Override

@@ -163,9 +163,9 @@ public class MainNav extends ListFragment implements OnItemClickListener, OnMenu
 				neuesFragment = new KundenSucheId();
 				break;
 				
-//			case R.id.kunden_suche_nachname:
-//				neuesFragment = new KundenSucheNachname();
-//				break;
+			case R.id.kunden_suche_nachname:
+				neuesFragment = new KundenSucheNachname();
+				break;
 
 //			case R.id.bestellungen_neu:
 //				neuesFragment = new BestellungenNeu();

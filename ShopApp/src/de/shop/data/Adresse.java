@@ -35,7 +35,7 @@ public class Adresse implements JsonMappable, Serializable {
 		this.land = land;
 	}
 	
-	// fuer AbstractKunde.toJsonObject()
+	// fuer Kunde.toJsonObject()
 	JsonObjectBuilder getJsonBuilderFactory() {
 		return jsonBuilderFactory.createObjectBuilder()
 								.add("id", id)

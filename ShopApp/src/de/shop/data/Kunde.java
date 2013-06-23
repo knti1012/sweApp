@@ -17,7 +17,6 @@ import de.shop.util.InternalShopError;
 
 public class Kunde implements JsonMappable, Serializable {
 	private static final long serialVersionUID = 1293068472891525321L;
-	private static final String DATE_FORMAT = "yyyy-MM-dd";
 	
 	public Long id;
 	public int version;
@@ -26,7 +25,6 @@ public class Kunde implements JsonMappable, Serializable {
 	public String email;
 	public String geschlecht;
 	public boolean agbAkzeptiert = true;
-//	public Date erzeugt;
 	public String bestellungenUri;
 	public Adresse adresse;
 	
@@ -39,7 +37,6 @@ public class Kunde implements JsonMappable, Serializable {
 				.add("email", email)
 				.add("geschlecht", geschlecht)
 				.add("agbAkzeptiert", agbAkzeptiert)
-//				.add("erzeugt", new SimpleDateFormat(DATE_FORMAT, Locale.getDefault()).format(erzeugt))
 				.add("bestellungenUri", bestellungenUri)
 				.add("adresse", adresse.getJsonBuilderFactory());
 											
@@ -62,14 +59,7 @@ public class Kunde implements JsonMappable, Serializable {
 		agbAkzeptiert = jsonObject.getBoolean("agbAkzeptiert");
 		geschlecht = jsonObject.getString("geschlecht");
 		Log.v("Kunde", "kunde ohne bestellungen = " + this.toString());
-//		try {
-//			Log.v("Kunde", "Vor erzeugt: "+erzeugt);
-//			erzeugt = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault()).parse(jsonObject.getString("erzeugt"));
-//			Log.v("Kunde", "Nach erzeugt: "+erzeugt);
-//		}
-//		catch (ParseException e) {
-//			throw new InternalShopError(e.getMessage(), e);
-//		};
+
 		String x = jsonObject.getString("bestellungen");
 		Log.v("Kunde json objekt", x);
 		bestellungenUri = x;

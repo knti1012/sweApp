@@ -57,7 +57,7 @@ public class KundeService extends Service {
 			return progressDialog;
 		}
 		
-public HttpResponse<Kunde> sucheKundeById(Long id, final Context ctx) {
+		public HttpResponse<Kunde> sucheKundeById(Long id, final Context ctx) {
 			
 			// (evtl. mehrere) Parameter vom Typ "Long", Resultat vom Typ "Kunde"
 			final AsyncTask<Long, Void, HttpResponse<Kunde>> sucheKundeByIdTask = new AsyncTask<Long, Void, HttpResponse<Kunde>>() {
@@ -130,7 +130,7 @@ public HttpResponse<Kunde> sucheKundeById(Long id, final Context ctx) {
 				// Neuer Thread, damit der UI-Thread nicht blockiert wird
 				protected HttpResponse<Kunde> doInBackground(String... nachnamen) {
 					final String nachname = nachnamen[0];
-					final String path = NACHNAME_PATH + nachname;
+					final String path = KUNDEN_PATH + "/" + nachname;
 					Log.v(LOG_TAG, "path = " + path);
 		    		final HttpResponse<Kunde> result = mock
 		    				                                   ? Mock.sucheKundenByNachname(nachname)

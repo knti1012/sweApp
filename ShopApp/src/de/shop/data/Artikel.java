@@ -29,7 +29,6 @@ public class Artikel implements JsonMappable, Serializable  {
 	public String kategorie;
 	public Long lagerbestand;
 	public String name;
-//	public Date erzeugt;
 	public Double preis;
 
 	public Artikel() {
@@ -47,7 +46,6 @@ public class Artikel implements JsonMappable, Serializable  {
 		this.kategorie = kategorie;
 		this.lagerbestand = lagerbestand;
 		this.name = name;
-//		this.erzeugt = erzeugt;
 		this.preis = preis;
 	}
 
@@ -56,7 +54,6 @@ public class Artikel implements JsonMappable, Serializable  {
 	@Override
 	public JsonObject toJsonObject() {
 		return jsonBuilderFactory.createObjectBuilder()
-		                        //.add("id", id)
 		                         .add("version", version)
 		                         .add("art", art)
 		                         .add("farbe", farbe)
@@ -64,7 +61,6 @@ public class Artikel implements JsonMappable, Serializable  {
 		                         .add("kategorie", kategorie)
 		                         .add("lagerbestand", lagerbestand)
 		                         .add("name", name)
-		                         //.add("erzeugt", new SimpleDateFormat(DATE_FORMAT, Locale.getDefault()).format(erzeugt))
 		                         .add("preis", preis)
 		                         .build();
 	}
@@ -77,13 +73,6 @@ public class Artikel implements JsonMappable, Serializable  {
 		Log.v("Artikel", "fromJsonObject !!! Version ");
 		art = jsonObject.getString("art");
 		Log.v("Artikel", "fromJsonObject !!! Art ");
-//		try {
-//			erzeugt = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault()).parse(jsonObject.getString("erzeugt"));
-//		}
-//		catch (ParseException e) {
-//			throw new InternalShopError(e.getMessage(), e);
-//		};
-//		Log.v("Artikel", "fromJsonObject !!! Erzeugt ");
 		farbe = jsonObject.getString("farbe");
 		Log.v("Artikel", "fromJsonObject !!! Farbe ");
 		groesse = jsonObject.getString("groesse");
